@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Baby Shower de la Jefa! 🍋</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            /* Líneas verticales gruesas (aprox 30px por franja) */
+            background-image: repeating-linear-gradient(90deg, 
+                #ffffff, 
+                #ffffff 30px, 
+                #e8f1f9 30px, 
+                #e8f1f9 60px
+            );
+            color: #2b3a4a;
+            overflow-x: hidden;
+        }
+
+        /* --- LIMONES FLOTANTES EN EL FONDO --- */
+        .decorations-container {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            pointer-events: none; z-index: 0;
+        }
+        .leaf-lemon {
+            position: absolute; font-size: 24px; opacity: 0.8;
+            animation: floatDecoration 6s ease-in-out infinite alternate;
+        }
+        @keyframes floatDecoration {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(15deg); }
+        }
+
+        /* --- SECCIÓN HERO (DONDE ESTÁ EL SOBRE Y LA CARTA) --- */
+        #hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .showcase-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        /* Imagen/SVG del sobre CERRADO */
+        #img-cerrado {
+            position: absolute;
+            width: 1000px; 
+            cursor: pointer;
+            z-index: 5;
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        #img-cerrado:hover { transform: scale(1.03); }
+
+        /* Contenedor del sobre ABIERTO y la TARJETA */
+        .split-view {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Imágenes internas */
+        #img-abierto, #img-tarjeta {
+            position: absolute;
+            width: 450px; 
+            transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+            filter: drop-shadow(4px 4px 6px rgba(28, 61, 90, 0.4));
+        }
+
+        /* Posiciones iniciales */
+        #img-abierto { transform: translateX(0) scale(0.8) rotate(-5deg); }
+        #img-tarjeta { transform: translateX(0) scale(0.8) rotate(5deg); }
+
+        /* --- ANIMACIÓN AL HACER CLIC (.opened) --- */
+        #hero.opened #img-cerrado {
+            opacity: 0;
+            transform: scale(0.8) translateY(20px);
+            pointer-events: none;
+        }
+
+        #hero.opened .split-view {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #hero.opened #img-abierto { transform: translate(-240px, -40px) scale(1.15) rotate(-3deg); }
+        #hero.opened #img-tarjeta { transform: translate(240px, 50px) scale(1) rotate(2deg); }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* --- INDICADOR DE SCROLL --- */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0; 
+            pointer-events: none;
+            transition: opacity 1s ease-out 0.5s;
+        }
+
+        .scroll-indicator span {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #1c3d5a;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            animation: bounceArrow 2s infinite;
+        }
+
+        #hero.opened .scroll-indicator {
+            opacity: 1;
+        }
+
+        @keyframes bounceArrow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        #main-content {
+            position: relative;
+            z-index: 5;
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px 20px 60px 20px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+            display: none;
+        }
+
+        #main-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(165, 193, 216, 0.2);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        h2.section-title { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #1c3d5a; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
+        
+        /* --- ESTILOS DE CARTAS AVENTADAS (SCATTERED) --- */
+        
+        .calendar-img {
+            width: 108%;
+            height: auto;
+            display: block;
+            margin: 20px 0 -85px -5%; 
+            transform: rotate(-4deg);
+            filter: drop-shadow(6px 12px 18px rgba(28, 61, 90, 0.25));
+            position: relative;
+            z-index: 1;
+            transition: transform 0.4s ease;
+        }
+
+        .calendar-img:hover {
+            transform: rotate(-2deg) scale(1.02);
+            z-index: 10;
+        }
+
+        .save-the-date-card {
+            background-image: url('save.png');
+            background-size: contain; 
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            width: 100%; 
+            aspect-ratio: 4 / 3; 
+            margin: 0 -5% 50px auto; 
+            
+            background-color: transparent;
+            box-shadow: none; 
+            border-radius: 0;
+            position: relative;
+            
+            transform: rotate(3deg);
+            filter: drop-shadow(-6px 12px 18px rgba(28, 61, 90, 0.25));
+            z-index: 2;
+            transition: transform 0.4s ease;
+        }
+
+        .save-the-date-card:hover {
+            transform: rotate(1deg) scale(1.02);
+            z-index: 10;
+        }
+
+        .absolute-wrapper {
+            position: absolute;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px; 
+        }
+
+        .countdown-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: flex-start; 
+            gap: 15px; 
+            width: 100%;
+        }
+
+        .countdown-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-box { 
+            background: transparent; 
+            border: 1px solid #4a728a; 
+            width: 75px; 
+            height: 85px; 
+            position: relative;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .countdown-box::before, .countdown-box::after {
+            content: ''; position: absolute;
+            width: 8px; height: 8px; background: #faf9f6; 
+        }
+        .countdown-box::before { top: -1px; left: -1px; border-right: 1px solid #4a728a; border-bottom: 1px solid #4a728a; }
+        .countdown-box::after { bottom: -1px; right: -1px; border-left: 1px solid #4a728a; border-top: 1px solid #4a728a; }
+
+        .countdown-number { 
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem; 
+            color: #4a728a; 
+            line-height: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-separator {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: #4a728a;
+            line-height: 2.2; 
+        }
+
+        .countdown-heart { color: #4a728a; font-size: 0.9rem; margin-bottom: 5px; }
+
+        .countdown-label { 
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            color: #4a728a; 
+        }
+
+        .btn-calendar {
+            background-color: transparent;
+            color: #4a728a;
+            border: 1px solid #4a728a;
+            padding: 8px 22px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-calendar:hover {
+            background-color: #4a728a;
+            color: #ffffff;
+        }
+
+        /* --- ESTILOS DE LA HORA --- */
+        .time-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px auto; 
+            width: 100%;
+            position: relative; 
+            z-index: 5;
+        }
+
+        .time-img {
+            /* TAMAÑO EXACTO ORIGINAL QUE ME DISTE */
+            width: 200%;
+            max-width: 1500px; 
+            height: auto;
+            /* Esto es lo que la mueve a la derecha a la ubicación del círculo rojo */
+            margin-left: 350px; 
+            filter: drop-shadow(0 10px 20px rgba(165, 193, 216, 0.3));
+            transition: transform 0.3s ease;
+        }
+
+        .time-img:hover {
+            transform: scale(1.03) translateY(-50px); 
+        }
+
+        /* --- ESTILOS DE MESA DE REGALOS --- */
+        .gift-section {
+            display: block; 
+            margin: 20px 0 40px 0; 
+            width: 100%;
+            position: relative; 
+        }
+
+        .gift-link {
+            display: block;
+            transition: transform 0.3s ease;
+            width: 180%; 
+            max-width: 1500px; 
+            margin-left: -350px; 
+        }
+
+        .gift-link img {
+            width: 100%; 
+            height: auto;
+            filter: drop-shadow(0 10px 20px rgba(165, 193, 216, 0.3));
+        }
+
+        .gift-link:hover {
+            transform: scale(1.03) translateY(-5px); 
+        }
+
+        /* --- OTROS ESTILOS --- */
+        .btn-link {
+            display: inline-block; margin-top: 15px; padding: 12px 30px;
+            background-color: #1c3d5a; color: #ffffff; text-decoration: none;
+            border-radius: 30px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
+        }
+        .btn-whatsapp { background-color: #25d366; }
+
+        /* --- RESPONSIVIDAD PARA MÓVILES --- */
+        @media(max-width: 768px) {
+            #img-cerrado { width: 320px; }
+            #hero.opened #img-abierto { transform: translate(0, -160px) scale(0.8) rotate(-3deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 150px) scale(0.7) rotate(2deg); z-index: 2; }
+            .showcase-wrapper { height: 800px; }
+            .scroll-indicator { bottom: 10px; }
+            
+            .calendar-img {
+                width: 110%;
+                margin: 10px 0 -55px -5%;
+                transform: rotate(-3deg);
+            }
+            .save-the-date-card {
+                width: 100%;
+                margin: 0 -5% 40px auto;
+                transform: rotate(2deg);
+            }
+
+            .absolute-wrapper {
+                top: 58%;
+                gap: 15px; 
+            }
+            .countdown-container { 
+                gap: 5px; 
+            }
+            .countdown-separator {
+                font-size: 1.2rem;
+                margin-top: 15px;
+            }
+            .countdown-box { 
+                width: 48px; 
+                height: 55px; 
+                padding: 0;
+            }
+            .countdown-number { 
+                font-size: 1.5rem; 
+            }
+            .countdown-label {
+                font-size: 0.5rem; 
+            }
+            .btn-calendar {
+                font-size: 0.65rem;
+                padding: 6px 16px;
+            }
+            
+            .gift-link {
+                width: 115%; 
+                max-width: 500px; 
+                margin-left: -20px; 
+            }
+
+            /* Devuelve la hora a su estado normal y centrado en celular */
+            .time-img {
+                width: 100%;
+                max-width: 350px;
+                margin-left: 0; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="decorations-container">
+        <div class="leaf-lemon" style="top: 10%; left: 8%; animation-delay: 0s;"></div>
+        <div class="leaf-lemon" style="top: 15%; right: 10%; animation-delay: 1.5s;"></div>
+        <div class="leaf-lemon" style="bottom: 20%; left: 5%; animation-delay: 0.5s;"></div>
+        <div class="leaf-lemon" style="top: 45%; left: 12%; animation-delay: 3s;"></div>
+    </div>
+
+    <div id="hero">
+        <div class="showcase-wrapper">
+            <img id="img-cerrado" onclick="abrirInvitacion()" src="cerrado.png" alt="Sobre Cerrado"> 
+            <div class="split-view">
+                <img id="img-abierto" src="sobre.png" alt="Sobre Abierto">
+                <img id="img-tarjeta" src="tar.png" alt="Tarjeta Invitación">
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Desliza</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="#cca43b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+        </div>
+    </div>
+
+    <div id="main-content">
+        
+        <img class="calendar-img" src="sbado.png" alt="Detalles de Cuándo y Dónde">
+
+        <div class="save-the-date-card">
+            <div class="absolute-wrapper">
+                <div class="countdown-container">
+                    <div class="countdown-wrapper">
+                        <div class="countdown-box"><span class="countdown-number" id="days">00</span></div>
+                        <div class="countdown-heart">♥</div>
+                        <div class="countdown-label">DÍAS</div>
+                    </div>
+                    <div class="countdown-separator">·</div>
+                    <div class="countdown-wrapper">
+                        <div class="countdown-box"><span class="countdown-number" id="hours">00</span></div>
+                        <div class="countdown-heart">♥</div>
+                        <div class="countdown-label">HORAS</div>
+                    </div>
+                    <div class="countdown-separator">·</div>
+                    <div class="countdown-wrapper">
+                        <div class="countdown-box"><span class="countdown-number" id="minutes">00</span></div>
+                        <div class="countdown-heart">♥</div>
+                        <div class="countdown-label">MINUTOS</div>
+                    </div>
+                    <div class="countdown-separator">·</div>
+                    <div class="countdown-wrapper">
+                        <div class="countdown-box"><span class="countdown-number" id="seconds">00</span></div>
+                        <div class="countdown-heart">♥</div>
+                        <div class="countdown-label">SEGUNDOS</div>
+                    </div>
+                </div>
+
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%C2%A1Baby+Shower+Diaz+Arriaga!&dates=20260620T100000/20260620T150000&details=%C2%A1Te+esperamos+para+celebrar!&location=Jard%C3%ADn+Los+Limoneros" target="_blank" class="btn-calendar">
+                    🗓 Agendar en Calendario
+                </a>
+            </div>
+        </div>
+
+        <div class="time-section">
+            <img class="time-img" src="hora.png" alt="A partir de las 10:00 AM">
+        </div>
+
+        <div class="gift-section">
+            <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52004491" target="_blank" class="gift-link">
+                <img src="regalito.png" alt="Click aquí para ir a la Mesa de Regalos">
+            </a>
+        </div>
+        
+    </div>
+
+    <script>
+        function abrirInvitacion() {
+            document.getElementById('hero').classList.add('opened');
+            
+            const mainContent = document.getElementById('main-content');
+            setTimeout(() => {
+                mainContent.classList.add('show');
+            }, 800); 
+        }
+
+        const targetDate = new Date(2026, 5, 20, 10, 0, 0).getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+            if (difference < 0) return;
+
+            document.getElementById('days').innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+            document.getElementById('hours').innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
+        }, 1000);
+    </script>
+</body>
+</html>
