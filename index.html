@@ -207,6 +207,33 @@
             text-transform: uppercase; letter-spacing: 1px; color: #4a728a; font-weight: 700;
         }
 
+        /* --- TEXTO DEL MAPA --- */
+        .map-text {
+            text-align: center;
+            color: #4a728a;
+            margin-bottom: 15px;
+            margin-top: 10px;
+            z-index: 5;
+            position: relative;
+            transform: rotate(-1.5deg);
+        }
+        
+        .map-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        
+        .map-text p {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+
         /* --- BOTÓN ELEGANTE --- */
         .btn-elegant {
             background-color: rgba(255, 255, 255, 0.5);
@@ -288,13 +315,13 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - SOBRE CERRADO MÁS GRANDE */
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - MÁS SEPARADOS VERTICALMENTE */
             #img-cerrado { width: 92vw; max-width: 340px; } 
             .showcase-wrapper { height: 100vh; }
             
-            /* Creció el cerrado, así que el abierto también sube un pelín para verse proporcional */
-            #hero.opened #img-abierto { transform: translate(0, -8vh) scale(0.72) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 10vh) scale(0.76) rotate(2deg); z-index: 2; }
+            /* Aumentamos la distancia de translate en 'vh' para que no se encimen */
+            #hero.opened #img-abierto { transform: translate(0, -12vh) scale(0.72) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 15vh) scale(0.76) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
@@ -303,13 +330,20 @@
             
             .invitation-element { margin-bottom: 25px; width: 95%; max-width: none; } 
             
+            /* Save the date reducido para que no sea tan tosco */
+            .save-the-date-card { width: 85% !important; margin: 0 auto 25px auto; }
+            
             /* Hacemos que la imagen de la HORA sea un poquito más grande que las demás */
             .img-hora { width: 104% !important; max-width: 104% !important; }
             
             .invitation-element:nth-child(odd) { transform: rotate(-1.5deg); }
             .invitation-element:nth-child(even) { transform: rotate(1.5deg); }
 
-            /* 3. Cronómetro Perfecto (Fluido) */
+            /* 3. Ajuste texto del mapa para móviles */
+            .map-text h2 { font-size: 2rem; }
+            .map-text p { font-size: 0.75rem; }
+
+            /* 4. Cronómetro Perfecto (Fluido) */
             .absolute-wrapper { top: 54%; } 
             .countdown-container { gap: 4px; }
             .countdown-separator { font-size: 1.2rem; margin-top: 10px; }
@@ -323,7 +357,7 @@
 
             .btn-elegant { font-size: clamp(0.65rem, 2.5vw, 0.85rem); padding: 10px 18px; margin-top: 12px; border-width: 1.5px;}
             
-            /* 4. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
+            /* 5. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
             .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 15px;}
             .stores-wrapper { gap: 15px; width: 100%; justify-content: center; transform: translateX(0); }
             
@@ -400,6 +434,12 @@
                     📲 Confirma a este número
                 </a>
             </div>
+        </div>
+
+        <!-- TEXTO DEL MAPA -->
+        <div class="map-text">
+            <h2>¿Dónde?</h2>
+            <p>(Toca el mapa para abrir la ubicación)</p>
         </div>
 
         <!-- 4. Maps -->
