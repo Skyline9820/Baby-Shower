@@ -288,13 +288,13 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - PUNTO MEDIO Y CENTRADO */
-            #img-cerrado { width: 85vw; max-width: 300px; } /* Sobre cerrado tamaño intermedio */
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - SOBRE CERRADO MÁS GRANDE */
+            #img-cerrado { width: 92vw; max-width: 340px; } 
             .showcase-wrapper { height: 100vh; }
             
-            /* Escala intermedia (0.68 y 0.72) y menos separación vertical para centrarlos como un solo bloque */
-            #hero.opened #img-abierto { transform: translate(0, -8vh) scale(0.68) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 10vh) scale(0.72) rotate(2deg); z-index: 2; }
+            /* Creció el cerrado, así que el abierto también sube un pelín para verse proporcional */
+            #hero.opened #img-abierto { transform: translate(0, -8vh) scale(0.72) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 10vh) scale(0.76) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
@@ -302,6 +302,9 @@
             #main-content { padding: 10px 2vw 100px 2vw; } 
             
             .invitation-element { margin-bottom: 25px; width: 95%; max-width: none; } 
+            
+            /* Hacemos que la imagen de la HORA sea un poquito más grande que las demás */
+            .img-hora { width: 104% !important; max-width: 104% !important; }
             
             .invitation-element:nth-child(odd) { transform: rotate(-1.5deg); }
             .invitation-element:nth-child(even) { transform: rotate(1.5deg); }
