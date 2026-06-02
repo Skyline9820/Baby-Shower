@@ -288,21 +288,19 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - MUCHO MÁS PEQUEÑO AL ABRIRSE */
-            #img-cerrado { width: 75vw; max-width: 250px; } /* Sobre cerrado más compacto */
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - PUNTO MEDIO Y CENTRADO */
+            #img-cerrado { width: 85vw; max-width: 300px; } /* Sobre cerrado tamaño intermedio */
             .showcase-wrapper { height: 100vh; }
             
-            /* scale reducido a 0.5 y 0.55 para que quepa bien en la pantalla */
-            #hero.opened #img-abierto { transform: translate(0, -10vh) scale(0.5) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 8vh) scale(0.55) rotate(2deg); z-index: 2; }
+            /* Escala intermedia (0.68 y 0.72) y menos separación vertical para centrarlos como un solo bloque */
+            #hero.opened #img-abierto { transform: translate(0, -8vh) scale(0.68) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 10vh) scale(0.72) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
             /* 2. Reducción de márgenes globales y AUMENTO del tamaño de imágenes */
-            /* Quitamos padding lateral para que las imágenes usen más ancho */
             #main-content { padding: 10px 2vw 100px 2vw; } 
             
-            /* Hacemos que los elementos abarquen hasta el 95% del ancho del celular */
             .invitation-element { margin-bottom: 25px; width: 95%; max-width: none; } 
             
             .invitation-element:nth-child(odd) { transform: rotate(-1.5deg); }
