@@ -315,13 +315,13 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - MÁS SEPARADOS VERTICALMENTE */
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - ¡SEPARACIÓN TOTAL! */
             #img-cerrado { width: 92vw; max-width: 340px; } 
             .showcase-wrapper { height: 100vh; }
             
-            /* Aumentamos la distancia de translate en 'vh' para que no se encimen */
-            #hero.opened #img-abierto { transform: translate(0, -12vh) scale(0.72) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 15vh) scale(0.76) rotate(2deg); z-index: 2; }
+            /* El sobre sube muchísimo (-24vh) y la tarjeta baja (18vh) para no encimarse nada */
+            #hero.opened #img-abierto { transform: translate(0, -24vh) scale(0.72) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 18vh) scale(0.76) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
@@ -330,10 +330,9 @@
             
             .invitation-element { margin-bottom: 25px; width: 95%; max-width: none; } 
             
-            /* Save the date reducido para que no sea tan tosco */
-            .save-the-date-card { width: 85% !important; margin: 0 auto 25px auto; }
+            /* SAVE THE DATE REDUCIDO: Lo hacemos bastante más pequeño y centrado */
+            .save-the-date-card { width: 85vw !important; max-width: 310px !important; margin: 0 auto 25px auto; }
             
-            /* Hacemos que la imagen de la HORA sea un poquito más grande que las demás */
             .img-hora { width: 104% !important; max-width: 104% !important; }
             
             .invitation-element:nth-child(odd) { transform: rotate(-1.5deg); }
@@ -343,19 +342,19 @@
             .map-text h2 { font-size: 2rem; }
             .map-text p { font-size: 0.75rem; }
 
-            /* 4. Cronómetro Perfecto (Fluido) */
+            /* 4. Cronómetro Perfecto - ESCALADO PARA ENCAJAR EN LA TARJETA MÁS PEQUEÑA */
             .absolute-wrapper { top: 54%; } 
             .countdown-container { gap: 4px; }
             .countdown-separator { font-size: 1.2rem; margin-top: 10px; }
             
-            .countdown-box { width: 14vw; height: 16vw; max-width: 50px; max-height: 55px; padding: 0; margin-bottom: 5px; border-width: 1px;}
+            .countdown-box { width: 12vw; height: 14vw; max-width: 42px; max-height: 48px; padding: 0; margin-bottom: 5px; border-width: 1px;}
             .countdown-box::before, .countdown-box::after { width: 5px; height: 5px; }
             
-            .countdown-number { font-size: clamp(1.2rem, 5vw, 1.6rem); }
-            .countdown-label { font-size: clamp(0.4rem, 1.8vw, 0.6rem); letter-spacing: 0; }
-            .countdown-heart { font-size: 0.8rem; margin-bottom: 2px; }
+            .countdown-number { font-size: clamp(1rem, 4vw, 1.4rem); }
+            .countdown-label { font-size: clamp(0.4rem, 1.5vw, 0.55rem); letter-spacing: 0; }
+            .countdown-heart { font-size: 0.7rem; margin-bottom: 2px; }
 
-            .btn-elegant { font-size: clamp(0.65rem, 2.5vw, 0.85rem); padding: 10px 18px; margin-top: 12px; border-width: 1.5px;}
+            .btn-elegant { font-size: clamp(0.6rem, 2vw, 0.8rem); padding: 8px 16px; margin-top: 12px; border-width: 1.5px;}
             
             /* 5. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
             .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 15px;}
