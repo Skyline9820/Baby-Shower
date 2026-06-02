@@ -108,7 +108,9 @@
         }
 
         .scroll-indicator svg { width: 30px; height: 30px; animation: bounceArrow 2s infinite; }
-        #hero.opened .scroll-indicator { opacity: 1; }
+        
+        /* CORRECCIÓN 1: Hacemos el indicador clickeable al abrir el sobre */
+        #hero.opened .scroll-indicator { opacity: 1; pointer-events: auto; cursor: pointer; }
 
         @keyframes bounceArrow {
             0%, 100% { transform: translateY(0); }
@@ -315,14 +317,14 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - TAMAÑO MÁS PEQUEÑO Y ARMÓNICO */
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - RECORRIDO HACIA ARRIBA */
             #img-cerrado { width: 82vw; max-width: 290px; } 
-            .showcase-wrapper { height: 100vh; }
+            .showcase-wrapper { height: 100vh; margin-top: -12vh; }
             
-            #hero.opened #img-abierto { transform: translate(0, -20vh) scale(0.62) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 16vh) scale(0.66) rotate(2deg); z-index: 2; }
+            #hero.opened #img-abierto { transform: translate(0, -14vh) scale(0.62) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 18vh) scale(0.66) rotate(2deg); z-index: 2; }
             
-            .scroll-indicator { bottom: 15px; }
+            .scroll-indicator { bottom: 12vh; }
             
             /* 2. Reducción de márgenes globales y AUMENTO del tamaño de imágenes */
             #main-content { padding: 10px 2vw 100px 2vw; } 
@@ -341,7 +343,7 @@
             .map-text p { font-size: 0.75rem; }
 
             /* 4. Cronómetro Perfecto - ¡AJUSTADO PARA QUE NO SE AMONTONE! */
-            .absolute-wrapper { top: 58%; width: 90%; } /* Bajamos el bloque y damos márgenes a los lados */
+            .absolute-wrapper { top: 58%; width: 90%; } 
             .countdown-container { gap: 3px; }
             .countdown-separator { font-size: 1rem; margin-top: 8px; }
             
@@ -383,7 +385,6 @@
         <div class="leaf-lemon" style="top: 45%; left: 12%; animation-delay: 3s;"></div>
     </div>
 
-    <!-- SECCIÓN DE APERTURA -->
     <div id="hero">
         <div class="showcase-wrapper">
             <img id="img-cerrado" onclick="abrirInvitacion()" src="cerrado.png" alt="Sobre Cerrado"> 
@@ -392,7 +393,7 @@
                 <img id="img-tarjeta" src="tar.png" alt="Tarjeta Invitación">
             </div>
         </div>
-        <div class="scroll-indicator">
+        <div class="scroll-indicator" onclick="deslizarAbajo()">
             <span>Desliza</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="#cca43b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
@@ -400,16 +401,12 @@
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-content">
         
-        <!-- 1. Sábado -->
         <img class="invitation-element section-image" src="sbado.png" alt="Día del Evento">
 
-        <!-- 2. Hora -->
         <img class="invitation-element section-image img-hora" src="hora.png" alt="Hora del Evento">
 
-        <!-- 3. Cronómetro -->
         <div class="invitation-element save-the-date-card">
             <div class="absolute-wrapper">
                 <div class="countdown-container">
@@ -444,23 +441,18 @@
             </div>
         </div>
 
-        <!-- TEXTO DEL MAPA -->
         <div class="map-text">
             <h2>¿Dónde?</h2>
             <p>(Toca el mapa para abrir la ubicación)</p>
         </div>
 
-        <!-- 4. Maps -->
         <a href="https://maps.google.com/?q=Santa+Barbara+443+Club+Golf+Tres+Marias+Morelia" target="_blank" class="invitation-element image-link img-maps">
             <img class="section-image" src="maps.png" alt="Abrir en Google Maps">
         </a>
 
-        <!-- 5. Regalito + Amazon y Liverpool Independientes -->
         <div class="invitation-element wrapper-regalo">
-            <!-- La imagen del regalo arriba -->
             <img class="section-image img-regalo" src="regalito.png" alt="Mesa de Regalos">
             
-            <!-- Posicionador que se asegura de estar AFUERA de la imagen, alineado al 55% derecho -->
             <div class="stores-positioner">
                 <div class="stores-wrapper">
                     <a href="https://www.amazon.com.mx/baby-reg/karla-arriaga-julio-2026-morelia/2N7XOAY4BZ3CV" target="_blank" class="store-link">
@@ -486,6 +478,13 @@
             setTimeout(() => {
                 mainContent.classList.add('show');
             }, 800); 
+        }
+
+        function deslizarAbajo() {
+            document.getElementById('main-content').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'start' 
+            });
         }
 
         const targetDate = new Date(2026, 5, 20, 10, 0, 0).getTime();
