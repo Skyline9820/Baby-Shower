@@ -315,13 +315,13 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - ¡SEPARACIÓN TOTAL! */
-            #img-cerrado { width: 92vw; max-width: 340px; } 
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - TAMAÑO MÁS PEQUEÑO Y ARMÓNICO */
+            #img-cerrado { width: 82vw; max-width: 290px; } /* Reducido para que sea acorde al resto */
             .showcase-wrapper { height: 100vh; }
             
-            /* El sobre sube muchísimo (-24vh) y la tarjeta baja (18vh) para no encimarse nada */
-            #hero.opened #img-abierto { transform: translate(0, -24vh) scale(0.72) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 18vh) scale(0.76) rotate(2deg); z-index: 2; }
+            /* Escala reducida (0.62 y 0.66) manteniendo la buena separación vertical para que no se tapen */
+            #hero.opened #img-abierto { transform: translate(0, -20vh) scale(0.62) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 16vh) scale(0.66) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
