@@ -227,15 +227,15 @@
         .stores-positioner {
             width: 100%;
             display: flex;
-            justify-content: flex-end; /* Alinea los íconos a la derecha */
-            margin-top: -120px; /* Si la imagen de arriba tiene mucho espacio transparente, puedes cambiar este número a uno negativo como -20px */
+            justify-content: flex-end; 
+            margin-top: -120px; 
         }
 
         .stores-wrapper {
             display: flex; 
             justify-content: center; 
             gap: 40px; 
-            width: 55%; /* Se encarga de centrar los iconos exactamente en el área de la etiqueta derecha */
+            width: 55%; 
             z-index: 10;
             transform: translateX(40px);
         }
@@ -265,7 +265,7 @@
 
         .manita-sticker {
             position: absolute;
-            bottom: -55px; /* Colgando fuera del ícono */
+            bottom: -55px; 
             left: 50%; 
             width: 45px; 
             height: auto;
@@ -281,7 +281,6 @@
 
         /* --- RESPONSIVIDAD PARA MÓVILES --- */
         @media(max-width: 1024px) {
-            /* Ajuste para tablets y pantallas medianas */
             .stores-positioner { margin-top: -80px; } 
             .stores-wrapper { gap: 20px; width: auto; transform: translateX(0); margin-right: 5%; }
             .store-link { width: 110px; height: 110px; }
@@ -289,43 +288,44 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - TAMAÑO REDUCIDO */
-            #img-cerrado { width: 75vw; max-width: 280px; }
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - MUCHO MÁS PEQUEÑO AL ABRIRSE */
+            #img-cerrado { width: 75vw; max-width: 250px; } /* Sobre cerrado más compacto */
             .showcase-wrapper { height: 100vh; }
             
-            /* Movimiento más orgánico en pantallas verticales usando 'vh' */
-            #hero.opened #img-abierto { transform: translate(0, -10vh) scale(0.75) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 10vh) scale(0.8) rotate(2deg); z-index: 2; }
+            /* scale reducido a 0.5 y 0.55 para que quepa bien en la pantalla */
+            #hero.opened #img-abierto { transform: translate(0, -10vh) scale(0.5) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 8vh) scale(0.55) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
-            /* 2. Reducción de márgenes globales para aprovechar el espacio */
-            #main-content { padding: 10px 4vw 100px 4vw; }
-            .invitation-element { margin-bottom: 25px; }
+            /* 2. Reducción de márgenes globales y AUMENTO del tamaño de imágenes */
+            /* Quitamos padding lateral para que las imágenes usen más ancho */
+            #main-content { padding: 10px 2vw 100px 2vw; } 
+            
+            /* Hacemos que los elementos abarquen hasta el 95% del ancho del celular */
+            .invitation-element { margin-bottom: 25px; width: 95%; max-width: none; } 
+            
             .invitation-element:nth-child(odd) { transform: rotate(-1.5deg); }
             .invitation-element:nth-child(even) { transform: rotate(1.5deg); }
 
             /* 3. Cronómetro Perfecto (Fluido) */
-            .absolute-wrapper { top: 54%; } /* Centrado óptimo para el fondo save.png */
+            .absolute-wrapper { top: 54%; } 
             .countdown-container { gap: 4px; }
             .countdown-separator { font-size: 1.2rem; margin-top: 10px; }
             
-            /* Cajas dinámicas según el ancho de la pantalla (vw) */
             .countdown-box { width: 14vw; height: 16vw; max-width: 50px; max-height: 55px; padding: 0; margin-bottom: 5px; border-width: 1px;}
             .countdown-box::before, .countdown-box::after { width: 5px; height: 5px; }
             
-            /* clamp() asegura que la letra no sea ni minúscula ni gigante */
             .countdown-number { font-size: clamp(1.2rem, 5vw, 1.6rem); }
             .countdown-label { font-size: clamp(0.4rem, 1.8vw, 0.6rem); letter-spacing: 0; }
             .countdown-heart { font-size: 0.8rem; margin-bottom: 2px; }
 
             .btn-elegant { font-size: clamp(0.65rem, 2.5vw, 0.85rem); padding: 10px 18px; margin-top: 12px; border-width: 1.5px;}
             
-            /* 4. Acomodo de las tiendas de regalos (Amazon/Liverpool) - TAMAÑO REDUCIDO */
+            /* 4. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
             .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 15px;}
             .stores-wrapper { gap: 15px; width: 100%; justify-content: center; transform: translateX(0); }
             
-            /* Íconos más pequeños para no abarcar tanta pantalla */
             .store-link { width: 18vw; height: 18vw; max-width: 70px; max-height: 70px; }
             .manita-sticker { width: 22px; bottom: -18px; }
         }
