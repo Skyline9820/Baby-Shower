@@ -316,10 +316,9 @@
 
         @media(max-width: 768px) {
             /* 1. Ajuste del Sobre y Tarjeta (Hero) - TAMAÑO MÁS PEQUEÑO Y ARMÓNICO */
-            #img-cerrado { width: 82vw; max-width: 290px; } /* Reducido para que sea acorde al resto */
+            #img-cerrado { width: 82vw; max-width: 290px; } 
             .showcase-wrapper { height: 100vh; }
             
-            /* Escala reducida (0.62 y 0.66) manteniendo la buena separación vertical para que no se tapen */
             #hero.opened #img-abierto { transform: translate(0, -20vh) scale(0.62) rotate(-2deg); z-index: 1; }
             #hero.opened #img-tarjeta { transform: translate(0, 16vh) scale(0.66) rotate(2deg); z-index: 2; }
             
@@ -330,7 +329,6 @@
             
             .invitation-element { margin-bottom: 25px; width: 95%; max-width: none; } 
             
-            /* SAVE THE DATE REDUCIDO: Lo hacemos bastante más pequeño y centrado */
             .save-the-date-card { width: 85vw !important; max-width: 310px !important; margin: 0 auto 25px auto; }
             
             .img-hora { width: 104% !important; max-width: 104% !important; }
@@ -342,19 +340,30 @@
             .map-text h2 { font-size: 2rem; }
             .map-text p { font-size: 0.75rem; }
 
-            /* 4. Cronómetro Perfecto - ESCALADO PARA ENCAJAR EN LA TARJETA MÁS PEQUEÑA */
-            .absolute-wrapper { top: 54%; } 
-            .countdown-container { gap: 4px; }
-            .countdown-separator { font-size: 1.2rem; margin-top: 10px; }
+            /* 4. Cronómetro Perfecto - ¡AJUSTADO PARA QUE NO SE AMONTONE! */
+            .absolute-wrapper { top: 58%; width: 90%; } /* Bajamos el bloque y damos márgenes a los lados */
+            .countdown-container { gap: 3px; }
+            .countdown-separator { font-size: 1rem; margin-top: 8px; }
             
-            .countdown-box { width: 12vw; height: 14vw; max-width: 42px; max-height: 48px; padding: 0; margin-bottom: 5px; border-width: 1px;}
-            .countdown-box::before, .countdown-box::after { width: 5px; height: 5px; }
+            /* Cajas más chicas para que quepan bien */
+            .countdown-box { width: 11vw; height: 13vw; max-width: 38px; max-height: 44px; padding: 0; margin-bottom: 3px; border-width: 1px;}
+            .countdown-box::before, .countdown-box::after { width: 4px; height: 4px; }
             
-            .countdown-number { font-size: clamp(1rem, 4vw, 1.4rem); }
-            .countdown-label { font-size: clamp(0.4rem, 1.5vw, 0.55rem); letter-spacing: 0; }
-            .countdown-heart { font-size: 0.7rem; margin-bottom: 2px; }
+            /* Números y letras más sutiles */
+            .countdown-number { font-size: clamp(0.9rem, 3.5vw, 1.2rem); }
+            .countdown-label { font-size: clamp(0.35rem, 1.5vw, 0.45rem); letter-spacing: 0; }
+            .countdown-heart { font-size: 0.6rem; margin-bottom: 1px; }
 
-            .btn-elegant { font-size: clamp(0.6rem, 2vw, 0.8rem); padding: 8px 16px; margin-top: 12px; border-width: 1.5px;}
+            /* Botón refinado y más pequeño */
+            .btn-elegant { 
+                font-size: 0.55rem; 
+                padding: 7px 12px; 
+                margin-top: 8px; 
+                border-width: 1px; 
+                max-width: 95%; 
+                text-align: center; 
+                letter-spacing: 1px;
+            }
             
             /* 5. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
             .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 15px;}
