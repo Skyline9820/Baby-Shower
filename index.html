@@ -289,13 +289,13 @@
         }
 
         @media(max-width: 768px) {
-            /* 1. Ajuste del Sobre y Tarjeta (Hero) - AHORA MUCHO MÁS GRANDE */
-            #img-cerrado { width: 95vw; max-width: 450px; }
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - TAMAÑO REDUCIDO */
+            #img-cerrado { width: 75vw; max-width: 280px; }
             .showcase-wrapper { height: 100vh; }
             
             /* Movimiento más orgánico en pantallas verticales usando 'vh' */
-            #hero.opened #img-abierto { transform: translate(0, -14vh) scale(0.9) rotate(-2deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 15vh) scale(0.95) rotate(2deg); z-index: 2; }
+            #hero.opened #img-abierto { transform: translate(0, -10vh) scale(0.75) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 10vh) scale(0.8) rotate(2deg); z-index: 2; }
             
             .scroll-indicator { bottom: 15px; }
             
@@ -321,14 +321,13 @@
 
             .btn-elegant { font-size: clamp(0.65rem, 2.5vw, 0.85rem); padding: 10px 18px; margin-top: 12px; border-width: 1.5px;}
             
-            /* 4. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
-            /* Bajamos los íconos a la zona indicada con margin-top: 0 */
-            .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 20px;}
-            .stores-wrapper { gap: 20px; width: 100%; justify-content: center; transform: translateX(0); }
+            /* 4. Acomodo de las tiendas de regalos (Amazon/Liverpool) - TAMAÑO REDUCIDO */
+            .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 15px;}
+            .stores-wrapper { gap: 15px; width: 100%; justify-content: center; transform: translateX(0); }
             
-            /* Íconos un poco más grandes para que se vean bien en la zona libre */
-            .store-link { width: 25vw; height: 25vw; max-width: 90px; max-height: 90px; }
-            .manita-sticker { width: 30px; bottom: -25px; }
+            /* Íconos más pequeños para no abarcar tanta pantalla */
+            .store-link { width: 18vw; height: 18vw; max-width: 70px; max-height: 70px; }
+            .manita-sticker { width: 22px; bottom: -18px; }
         }
     </style>
 </head>
