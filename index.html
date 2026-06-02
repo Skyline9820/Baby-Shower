@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¡Baby Shower! </title>
+    <title>¡Baby Shower!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap" rel="stylesheet">
@@ -14,7 +14,6 @@
         body {
             font-family: 'Montserrat', sans-serif;
             background-color: #ffffff;
-            /* Líneas verticales gruesas (aprox 30px por franja) */
             background-image: repeating-linear-gradient(90deg, 
                 #ffffff, 
                 #ffffff 30px, 
@@ -23,9 +22,10 @@
             );
             color: #2b3a4a;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* --- LIMONES FLOTANTES EN EL FONDO --- */
+        /* --- LIMONES FLOTANTES --- */
         .decorations-container {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
@@ -40,7 +40,7 @@
             100% { transform: translateY(-20px) rotate(15deg); }
         }
 
-        /* --- SECCIÓN HERO (DONDE ESTÁ EL SOBRE Y LA CARTA) --- */
+        /* --- SECCIÓN HERO (SOBRE) --- */
         #hero {
             position: relative;
             width: 100%;
@@ -62,53 +62,30 @@
             perspective: 1000px;
         }
 
-        /* Imagen/SVG del sobre CERRADO */
         #img-cerrado {
-            position: absolute;
-            width: 1000px; 
-            cursor: pointer;
-            z-index: 5;
+            position: absolute; width: 1000px; cursor: pointer; z-index: 5;
             transition: opacity 0.6s ease, transform 0.6s ease;
             animation: float 3s ease-in-out infinite;
         }
         #img-cerrado:hover { transform: scale(1.03); }
 
-        /* Contenedor del sobre ABIERTO y la TARJETA */
         .split-view {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            pointer-events: none;
+            position: absolute; width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none;
         }
 
-        /* Imágenes internas */
         #img-abierto, #img-tarjeta {
-            position: absolute;
-            width: 450px; 
+            position: absolute; width: 450px; 
             transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
             filter: drop-shadow(4px 4px 6px rgba(28, 61, 90, 0.4));
         }
 
-        /* Posiciones iniciales */
         #img-abierto { transform: translateX(0) scale(0.8) rotate(-5deg); }
         #img-tarjeta { transform: translateX(0) scale(0.8) rotate(5deg); }
 
-        /* --- ANIMACIÓN AL HACER CLIC (.opened) --- */
-        #hero.opened #img-cerrado {
-            opacity: 0;
-            transform: scale(0.8) translateY(20px);
-            pointer-events: none;
-        }
-
-        #hero.opened .split-view {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
+        #hero.opened #img-cerrado { opacity: 0; transform: scale(0.8) translateY(20px); pointer-events: none; }
+        #hero.opened .split-view { opacity: 1; pointer-events: auto; }
         #hero.opened #img-abierto { transform: translate(-240px, -40px) scale(1.15) rotate(-3deg); }
         #hero.opened #img-tarjeta { transform: translate(240px, 50px) scale(1) rotate(2deg); }
 
@@ -117,39 +94,21 @@
             50% { transform: translateY(-12px); }
         }
 
-        /* --- INDICADOR DE SCROLL --- */
         .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0; 
-            pointer-events: none;
+            position: absolute; bottom: 30px; left: 50%;
+            transform: translateX(-50%); display: flex; flex-direction: column;
+            align-items: center; opacity: 0; pointer-events: none;
             transition: opacity 1s ease-out 0.5s;
         }
 
         .scroll-indicator span {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #1c3d5a;
-            margin-bottom: 5px;
-            font-weight: 600;
+            font-family: 'Montserrat', sans-serif; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 3px; color: #1c3d5a;
+            margin-bottom: 5px; font-weight: 600;
         }
 
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            animation: bounceArrow 2s infinite;
-        }
-
-        #hero.opened .scroll-indicator {
-            opacity: 1;
-        }
+        .scroll-indicator svg { width: 30px; height: 30px; animation: bounceArrow 2s infinite; }
+        #hero.opened .scroll-indicator { opacity: 1; }
 
         @keyframes bounceArrow {
             0%, 100% { transform: translateY(0); }
@@ -158,292 +117,218 @@
 
         /* --- CONTENIDO PRINCIPAL --- */
         #main-content {
-            position: relative;
-            z-index: 5;
-            max-width: 750px;
-            margin: 0 auto;
-            padding: 20px 20px 60px 20px;
-            opacity: 0;
-            transform: translateY(40px);
+            position: relative; z-index: 5; 
+            max-width: 100%; 
+            margin: 0 auto; 
+            padding: 20px 4vw 140px 4vw; 
+            opacity: 0; transform: translateY(40px);
             transition: opacity 1.2s ease-out, transform 1.2s ease-out;
-            display: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
         }
 
-        #main-content.show {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
-        }
+        #main-content.show { opacity: 1; transform: translateY(0); }
 
-        .glass-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 20px;
-            padding: 40px 30px;
-            margin-bottom: 35px;
-            box-shadow: 0 10px 30px rgba(165, 193, 216, 0.2);
-            text-align: center;
+        /* Estilo base para elementos */
+        .invitation-element {
             position: relative;
-            overflow: hidden;
+            width: 100%;
+            max-width: 950px; 
+            margin-bottom: 40px; 
+            filter: drop-shadow(0 15px 30px rgba(165, 193, 216, 0.3));
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
-
-        h2.section-title { font-family: 'Cinzel', serif; font-size: 1.4rem; color: #1c3d5a; letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
         
-        /* --- ESTILOS DE CARTAS AVENTADAS (SCATTERED) --- */
-        
-        .calendar-img {
-            width: 108%;
-            height: auto;
-            display: block;
-            margin: 20px 0 -85px -5%; 
-            transform: rotate(-4deg);
-            filter: drop-shadow(6px 12px 18px rgba(28, 61, 90, 0.25));
-            position: relative;
-            z-index: 1;
-            transition: transform 0.4s ease;
+        /* TAMAÑOS ESPECIALES */
+        .img-hora { max-width: 1150px !important; }
+        .img-maps { max-width: 1150px !important; }
+        .wrapper-regalo { max-width: 1350px !important; display: flex; flex-direction: column; } 
+
+        /* Alternando rotación */
+        .invitation-element:nth-child(odd) { transform: rotate(-2.5deg); }
+        .invitation-element:nth-child(even) { transform: rotate(2.5deg); }
+
+        /* Efecto al pasar el ratón */
+        .invitation-element:hover { 
+            transform: rotate(0deg) scale(1.02) !important; 
+            z-index: 50 !important; 
+            filter: drop-shadow(0 20px 40px rgba(165, 193, 216, 0.5));
         }
 
-        .calendar-img:hover {
-            transform: rotate(-2deg) scale(1.02);
-            z-index: 10;
-        }
+        .section-image { width: 100%; height: auto; display: block; }
+        .image-link { display: block; text-decoration: none; }
 
+        /* --- IMAGEN SAVE THE DATE CON CRONÓMETRO DENTRO --- */
         .save-the-date-card {
             background-image: url('save.png');
             background-size: contain; 
             background-position: center;
             background-repeat: no-repeat;
-            
-            width: 100%; 
             aspect-ratio: 4 / 3; 
-            margin: 0 -5% 50px auto; 
-            
-            background-color: transparent;
-            box-shadow: none; 
-            border-radius: 0;
-            position: relative;
-            
-            transform: rotate(3deg);
-            filter: drop-shadow(-6px 12px 18px rgba(28, 61, 90, 0.25));
-            z-index: 2;
-            transition: transform 0.4s ease;
-        }
-
-        .save-the-date-card:hover {
-            transform: rotate(1deg) scale(1.02);
-            z-index: 10;
         }
 
         .absolute-wrapper {
             position: absolute;
-            top: 55%;
-            left: 50%;
+            top: 55%; left: 50%;
             transform: translate(-50%, -50%);
             width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px; 
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .countdown-container { 
-            display: flex; 
-            justify-content: center; 
-            align-items: flex-start; 
-            gap: 15px; 
-            width: 100%;
+            display: flex; justify-content: center; align-items: flex-start; 
+            gap: 20px; width: 100%;
         }
 
-        .countdown-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        .countdown-wrapper { display: flex; flex-direction: column; align-items: center; }
 
         .countdown-box { 
-            background: transparent; 
-            border: 1px solid #4a728a; 
-            width: 75px; 
-            height: 85px; 
-            position: relative;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            background: transparent; border: 2px solid #4a728a; 
+            width: 95px; height: 110px; position: relative;
+            margin-bottom: 15px; display: flex; justify-content: center; align-items: center;
         }
 
         .countdown-box::before, .countdown-box::after {
-            content: ''; position: absolute;
-            width: 8px; height: 8px; background: #faf9f6; 
+            content: ''; position: absolute; width: 10px; height: 10px; background: #faf9f6; 
         }
-        .countdown-box::before { top: -1px; left: -1px; border-right: 1px solid #4a728a; border-bottom: 1px solid #4a728a; }
-        .countdown-box::after { bottom: -1px; right: -1px; border-left: 1px solid #4a728a; border-top: 1px solid #4a728a; }
+        .countdown-box::before { top: -2px; left: -2px; border-right: 2px solid #4a728a; border-bottom: 2px solid #4a728a; }
+        .countdown-box::after { bottom: -2px; right: -2px; border-left: 2px solid #4a728a; border-top: 2px solid #4a728a; }
 
         .countdown-number { 
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem; 
-            color: #4a728a; 
-            line-height: 1;
-            position: relative;
-            z-index: 2;
+            font-family: 'Cinzel', serif; font-size: 3.5rem; 
+            color: #4a728a; line-height: 1; position: relative; z-index: 2;
         }
 
-        .countdown-separator {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            color: #4a728a;
-            line-height: 2.2; 
-        }
-
-        .countdown-heart { color: #4a728a; font-size: 0.9rem; margin-bottom: 5px; }
-
+        .countdown-separator { font-family: 'Cinzel', serif; font-size: 2.8rem; color: #4a728a; line-height: 2.2; }
+        .countdown-heart { color: #4a728a; font-size: 1.1rem; margin-bottom: 5px; }
         .countdown-label { 
-            font-family: 'Cinzel', serif;
-            font-size: 0.75rem; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            color: #4a728a; 
+            font-family: 'Cinzel', serif; font-size: 0.9rem; 
+            text-transform: uppercase; letter-spacing: 1px; color: #4a728a; font-weight: 700;
         }
 
-        .btn-calendar {
-            background-color: transparent;
-            color: #4a728a;
-            border: 1px solid #4a728a;
-            padding: 8px 22px;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+        /* --- BOTÓN ELEGANTE --- */
+        .btn-elegant {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: #4a728a; border: 2px solid #4a728a;
+            padding: 14px 30px; border-radius: 30px;
+            font-size: 0.95rem; font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase; letter-spacing: 2px;
+            text-decoration: none; font-weight: 700;
+            transition: all 0.3s ease; margin-top: 25px; 
+            box-shadow: 0 5px 15px rgba(28, 61, 90, 0.1);
         }
 
-        .btn-calendar:hover {
-            background-color: #4a728a;
-            color: #ffffff;
+        .btn-elegant:hover {
+            background-color: #4a728a; color: #ffffff; transform: scale(1.05);
         }
 
-        /* --- ESTILOS DE LA HORA --- */
-        .time-section {
+        /* --- CONTENEDOR INTEGRADO MESA DE REGALOS + AMAZON/LIVERPOOL --- */
+        .stores-positioner {
+            width: 100%;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0 auto 30px auto; 
-            width: 100%;
-            position: relative; 
-            z-index: 5;
+            justify-content: flex-end; /* Alinea los íconos a la derecha */
+            margin-top: -120px; /* Si la imagen de arriba tiene mucho espacio transparente, puedes cambiar este número a uno negativo como -20px */
         }
 
-        .time-img {
-            /* TAMAÑO EXACTO ORIGINAL QUE ME DISTE */
-            width: 200%;
-            max-width: 1500px; 
-            height: auto;
-            /* Esto es lo que la mueve a la derecha a la ubicación del círculo rojo */
-            margin-left: 350px; 
-            filter: drop-shadow(0 10px 20px rgba(165, 193, 216, 0.3));
+        .stores-wrapper {
+            display: flex; 
+            justify-content: center; 
+            gap: 40px; 
+            width: 55%; /* Se encarga de centrar los iconos exactamente en el área de la etiqueta derecha */
+            z-index: 10;
+            transform: translateX(40px);
+        }
+
+        .store-link {
+            width: 140px; height: 140px; 
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none;
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: visible; 
         }
-
-        .time-img:hover {
-            transform: scale(1.03) translateY(-50px); 
-        }
-
-        /* --- ESTILOS DE MESA DE REGALOS --- */
-        .gift-section {
-            display: block; 
-            margin: 20px 0 40px 0; 
-            width: 100%;
-            position: relative; 
-        }
-
-        .gift-link {
-            display: block;
+        
+        .store-link:hover { transform: translateY(-8px); }
+        
+        .store-img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
             transition: transform 0.3s ease;
-            width: 180%; 
-            max-width: 1500px; 
-            margin-left: -350px; 
+            filter: drop-shadow(0 8px 15px rgba(165, 193, 216, 0.25)); 
+        }
+        .store-link:hover .store-img { 
+            transform: scale(1.05); 
+            filter: drop-shadow(0 12px 25px rgba(165, 193, 216, 0.35));
         }
 
-        .gift-link img {
-            width: 100%; 
+        .manita-sticker {
+            position: absolute;
+            bottom: -55px; /* Colgando fuera del ícono */
+            left: 50%; 
+            width: 45px; 
             height: auto;
-            filter: drop-shadow(0 10px 20px rgba(165, 193, 216, 0.3));
+            z-index: 10;
+            filter: drop-shadow(0 5px 8px rgba(28, 61, 90, 0.3));
+            animation: bounceSticker 1s infinite alternate;
         }
 
-        .gift-link:hover {
-            transform: scale(1.03) translateY(-5px); 
+        @keyframes bounceSticker {
+            0% { transform: translateX(-50%) translateY(0); }
+            100% { transform: translateX(-50%) translateY(8px); }
         }
-
-        /* --- OTROS ESTILOS --- */
-        .btn-link {
-            display: inline-block; margin-top: 15px; padding: 12px 30px;
-            background-color: #1c3d5a; color: #ffffff; text-decoration: none;
-            border-radius: 30px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;
-        }
-        .btn-whatsapp { background-color: #25d366; }
 
         /* --- RESPONSIVIDAD PARA MÓVILES --- */
+        @media(max-width: 1024px) {
+            /* Ajuste para tablets y pantallas medianas */
+            .stores-positioner { margin-top: -80px; } 
+            .stores-wrapper { gap: 20px; width: auto; transform: translateX(0); margin-right: 5%; }
+            .store-link { width: 110px; height: 110px; }
+            .manita-sticker { width: 35px; bottom: -25px; }
+        }
+
         @media(max-width: 768px) {
-            #img-cerrado { width: 320px; }
-            #hero.opened #img-abierto { transform: translate(0, -160px) scale(0.8) rotate(-3deg); z-index: 1; }
-            #hero.opened #img-tarjeta { transform: translate(0, 150px) scale(0.7) rotate(2deg); z-index: 2; }
-            .showcase-wrapper { height: 800px; }
-            .scroll-indicator { bottom: 10px; }
+            /* 1. Ajuste del Sobre y Tarjeta (Hero) - AHORA MUCHO MÁS GRANDE */
+            #img-cerrado { width: 95vw; max-width: 450px; }
+            .showcase-wrapper { height: 100vh; }
             
-            .calendar-img {
-                width: 110%;
-                margin: 10px 0 -55px -5%;
-                transform: rotate(-3deg);
-            }
-            .save-the-date-card {
-                width: 100%;
-                margin: 0 -5% 40px auto;
-                transform: rotate(2deg);
-            }
-
-            .absolute-wrapper {
-                top: 58%;
-                gap: 15px; 
-            }
-            .countdown-container { 
-                gap: 5px; 
-            }
-            .countdown-separator {
-                font-size: 1.2rem;
-                margin-top: 15px;
-            }
-            .countdown-box { 
-                width: 48px; 
-                height: 55px; 
-                padding: 0;
-            }
-            .countdown-number { 
-                font-size: 1.5rem; 
-            }
-            .countdown-label {
-                font-size: 0.5rem; 
-            }
-            .btn-calendar {
-                font-size: 0.65rem;
-                padding: 6px 16px;
-            }
+            /* Movimiento más orgánico en pantallas verticales usando 'vh' */
+            #hero.opened #img-abierto { transform: translate(0, -14vh) scale(0.9) rotate(-2deg); z-index: 1; }
+            #hero.opened #img-tarjeta { transform: translate(0, 15vh) scale(0.95) rotate(2deg); z-index: 2; }
             
-            .gift-link {
-                width: 115%; 
-                max-width: 500px; 
-                margin-left: -20px; 
-            }
+            .scroll-indicator { bottom: 15px; }
+            
+            /* 2. Reducción de márgenes globales para aprovechar el espacio */
+            #main-content { padding: 10px 4vw 100px 4vw; }
+            .invitation-element { margin-bottom: 25px; }
+            .invitation-element:nth-child(odd) { transform: rotate(-1.5deg); }
+            .invitation-element:nth-child(even) { transform: rotate(1.5deg); }
 
-            /* Devuelve la hora a su estado normal y centrado en celular */
-            .time-img {
-                width: 100%;
-                max-width: 350px;
-                margin-left: 0; 
-            }
+            /* 3. Cronómetro Perfecto (Fluido) */
+            .absolute-wrapper { top: 54%; } /* Centrado óptimo para el fondo save.png */
+            .countdown-container { gap: 4px; }
+            .countdown-separator { font-size: 1.2rem; margin-top: 10px; }
+            
+            /* Cajas dinámicas según el ancho de la pantalla (vw) */
+            .countdown-box { width: 14vw; height: 16vw; max-width: 50px; max-height: 55px; padding: 0; margin-bottom: 5px; border-width: 1px;}
+            .countdown-box::before, .countdown-box::after { width: 5px; height: 5px; }
+            
+            /* clamp() asegura que la letra no sea ni minúscula ni gigante */
+            .countdown-number { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+            .countdown-label { font-size: clamp(0.4rem, 1.8vw, 0.6rem); letter-spacing: 0; }
+            .countdown-heart { font-size: 0.8rem; margin-bottom: 2px; }
+
+            .btn-elegant { font-size: clamp(0.65rem, 2.5vw, 0.85rem); padding: 10px 18px; margin-top: 12px; border-width: 1.5px;}
+            
+            /* 4. Acomodo de las tiendas de regalos (Amazon/Liverpool) */
+            /* Bajamos los íconos a la zona indicada con margin-top: 0 */
+            .stores-positioner { margin-top: 0; justify-content: center; padding: 0; margin-bottom: 20px;}
+            .stores-wrapper { gap: 20px; width: 100%; justify-content: center; transform: translateX(0); }
+            
+            /* Íconos un poco más grandes para que se vean bien en la zona libre */
+            .store-link { width: 25vw; height: 25vw; max-width: 90px; max-height: 90px; }
+            .manita-sticker { width: 30px; bottom: -25px; }
         }
     </style>
 </head>
@@ -456,6 +341,7 @@
         <div class="leaf-lemon" style="top: 45%; left: 12%; animation-delay: 3s;"></div>
     </div>
 
+    <!-- SECCIÓN DE APERTURA -->
     <div id="hero">
         <div class="showcase-wrapper">
             <img id="img-cerrado" onclick="abrirInvitacion()" src="cerrado.png" alt="Sobre Cerrado"> 
@@ -472,11 +358,17 @@
         </div>
     </div>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <div id="main-content">
         
-        <img class="calendar-img" src="sbado.png" alt="Detalles de Cuándo y Dónde">
+        <!-- 1. Sábado -->
+        <img class="invitation-element section-image" src="sbado.png" alt="Día del Evento">
 
-        <div class="save-the-date-card">
+        <!-- 2. Hora -->
+        <img class="invitation-element section-image img-hora" src="hora.png" alt="Hora del Evento">
+
+        <!-- 3. Cronómetro -->
+        <div class="invitation-element save-the-date-card">
             <div class="absolute-wrapper">
                 <div class="countdown-container">
                     <div class="countdown-wrapper">
@@ -504,20 +396,36 @@
                     </div>
                 </div>
 
-                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=%C2%A1Baby+Shower+Diaz+Arriaga!&dates=20260620T100000/20260620T150000&details=%C2%A1Te+esperamos+para+celebrar!&location=Jard%C3%ADn+Los+Limoneros" target="_blank" class="btn-calendar">
-                    🗓 Agendar en Calendario
+                <a href="https://wa.me/5214433072009?text=Confirmo%20que%20asistire%20al%20baby%20shower" target="_blank" class="btn-elegant">
+                    📲 Confirma a este número
                 </a>
             </div>
         </div>
 
-        <div class="time-section">
-            <img class="time-img" src="hora.png" alt="A partir de las 10:00 AM">
-        </div>
+        <!-- 4. Maps -->
+        <a href="https://maps.google.com/?q=Santa+Barbara+443+Club+Golf+Tres+Marias+Morelia" target="_blank" class="invitation-element image-link img-maps">
+            <img class="section-image" src="maps.png" alt="Abrir en Google Maps">
+        </a>
 
-        <div class="gift-section">
-            <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52004491" target="_blank" class="gift-link">
-                <img src="regalito.png" alt="Click aquí para ir a la Mesa de Regalos">
-            </a>
+        <!-- 5. Regalito + Amazon y Liverpool Independientes -->
+        <div class="invitation-element wrapper-regalo">
+            <!-- La imagen del regalo arriba -->
+            <img class="section-image img-regalo" src="regalito.png" alt="Mesa de Regalos">
+            
+            <!-- Posicionador que se asegura de estar AFUERA de la imagen, alineado al 55% derecho -->
+            <div class="stores-positioner">
+                <div class="stores-wrapper">
+                    <a href="https://www.amazon.com.mx/baby-reg/karla-arriaga-julio-2026-morelia/2N7XOAY4BZ3CV" target="_blank" class="store-link">
+                        <img src="amazon.png" alt="Amazon" class="store-img">
+                        <img src="manita.png" alt="Click aquí" class="manita-sticker">
+                    </a>
+
+                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52004491" target="_blank" class="store-link">
+                        <img src="liverpool.png" alt="Liverpool" class="store-img">
+                        <img src="manita.png" alt="Click aquí" class="manita-sticker">
+                    </a>
+                </div>
+            </div>
         </div>
         
     </div>
